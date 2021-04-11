@@ -1,0 +1,27 @@
+{
+  "name": "note-app",
+  "version": "1.0.0",
+  "description": "A note app that help users to easily create and manage notes",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kodaas/Note-App.git"
+  },
+  "keywords": [
+    "note",
+    "app",
+    "javascript",
+    "task",
+    "todo",
+    "*"
+  ],
+  "author": "Ajala Fiyinfoluwa John",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Kodaas/Note-App/issues"
+  },
+  "homepage": "https://github.com/Kodaas/Note-App#readme"
+}

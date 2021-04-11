@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="*" target="_blank">
+    <link rel="manifest" href="manifest.json" />
+    <link rel="shortcut icon" href="albums-outline.svg" type="image/svg">
+    <link rel="stylesheet" href="assect/css/style.css">
+    <title>Note App</title>
+</head>
+
+<body>
+    <nav>
+        <h1>Note App</h1>
+        <span id="nav-email">email</span>
+    </nav>
+    <div id="container">
+        <div id="alert" class="alert-hidden">
+            <aside id="msg">Success</aside>
+            <span class="sn-btn">Sign In</span>
+        </div>
+        <span id="sign-in" class="component">
+            <h1>Sign In</h1>
+            <form>
+                <p id="snval-info"></p>
+                <input type="text" id="sn-name" class="input" name="name" placeholder="Your Nick-Name">
+                <input type="email" name="email" id="sn-email" class="input" placeholder="Your Email">
+                <input type="password" name="password" id="sn-pass" class="input" placeholder="Your Password">
+                <input type="password" name="con-password" id="sn-conpass" class="input" placeholder="Confirm Password">
+            </form>
+            <div class="bottom">
+                <button id="sn-submit" type="submit">Done</button>
+            </div>
+        </span>
+        <span id="log-in" class="component">
+            <h1>Log In</h1>
+            <form>
+                <p id="val-info"></p>
+                <input id="log-name" type="text" name="name" placeholder="Your Nick-Name">
+                <input id="log-pass" type="password" name="password" placeholder="Your Password">
+            </form>
+            <div class="bottom">
+                <p>Forgot Password</p>
+                <button id="log-submit" type="submit">Done</button>
+            </div>
+        </span>
+        <span id="list" class="component">
+            <input id="search" type="text" placeholder="Search">
+            <div class="banner">
+                <h1>Hello John 👋</h1>
+                <p>What will you like to do today</p>
+            </div>
+            <div class="empty">
+                <h2>😟</h2>
+                <h4>No Note :(</h4>
+            </div>
+            <div class="list-ui">
+                <!-- <div title="Click Content View More" class="card">
+                <h3 class="title">This is the title</h3>
+                <div class="body">Lorem ipsum dolor sit amet consectetur, adipisicing elit.</div>
+                <div class="delete" title="Delete" data-id="1">✖</div>
+                <div class="time" titlte="Time">01:44pm</div>
+            </div> -->
+            </div>
+            <button title="+Add Note" id="add">Add Note</button>
+            <button title="Log Out" id="log-out"></button>
+            <button title="Back To Top" id="to-top"></button>
+        </span>
+        <span id="new" class="component">
+            <form>
+                <p style="color: red; text-align: right" id="new-info"></p>
+                <label for="new-title">Title</label>
+                <input type="text" id="new-title" placeholder="Your Title" />
+
+                <label for="new-body">Body</label>
+                <textarea name="body" id="new-body" cols="50" rows="10" placeholder="Your Body"></textarea>
+            </form>
+            <div class="bottom">
+                <button id="cancel">✖ Cancel</button>
+                <button id="edith">Edith</button>
+                <button id="create">Done</button>
+            </div>
+        </span>
+        <span id="detail" class="component">
+            <span id="detail-time"></span>
+            <h2 id="detail-title"></h2>
+            <p id="detail-body"></p>
+            <div class="bottom">
+                <button id="return">Return</button>
+                <!-- <button id="delete"></button>
+                <button id="edith"></button> -->
+            </div>
+        </span>
+    </div>
+    <script src="./assect/js/sw.js"></script>
+    <script src="./assect/js/app.js"></script>
+</body>
+
+</html>

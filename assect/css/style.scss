@@ -1,0 +1,708 @@
+$speed: cubic-bezier(0.23, 1, 0.320, 1);
+$font:  -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+$colors: (
+    purple:#958cc0,
+    pink: #fe76c2,
+    blue:  #56d2f8e8,
+    red:  #f52b2bde,
+    gray:   #888888e0,
+    light-pink: lighten(#fe76c2,60%),
+    light-blue:  #56d2f89c,
+    light-gray:#dcdcdca2,
+    light-red: #fff3f3
+);
+
+
+@function color($color) {
+    @return map-get($map: $colors, $key: $color)
+}
+
+$desktop: 860px;
+$tab: 500px;
+
+@mixin btnsBg($bgsize) {
+    background-size: $bgsize;
+    background-repeat: no-repeat;
+    background-position: center;    
+}
+
+@mixin btns($margin,$width,$height,$font,$bgcolor,$color,$border-r,$border,$padding,$darken,$bgimg) {
+    width: $width;
+    height: $height;
+    margin: $margin;
+    outline: none;
+    border: $border;
+    font-size: $font;
+    padding: $padding;
+    color:$color;
+    cursor: pointer;
+    border-radius: $border-r;
+    background-image: $bgimg;
+    background-color: $bgcolor;
+    transition: all .8s $speed;
+    &:hover {
+        background-image: $bgimg;
+        background-color: darken($color: $bgcolor, $amount: $darken);
+    }
+}
+
+@mixin inputbg($bg,$size,$pos,$padding,$color) {
+    background-image: $bg;
+    background-size: $size;
+    background-position: $pos;
+    background-repeat: no-repeat;
+    // color: $color;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    padding-left: $padding;
+}
+
+
+@mixin desktop() {
+    @media (min-width: #{$desktop}) {
+        @content;
+    }    
+}
+
+@mixin desktop() {
+    @media (min-width: #{$tab}) {
+        @content;
+    }    
+}
+
+* {
+    font-family: 'bellota', sans-serif;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+}
+
+// body {border-radius: 20px;}
+
+input, textarea {
+    border: 2px solid transparent;
+    border-radius: 8px;
+    font-size: 16.5px;
+    outline: none;
+    transition: all .8s $speed;
+    background-color: color(light-gray);
+
+    &:focus {
+        border: 2px solid color(blue);
+    }
+}
+
+nav {
+    width: 100%;
+    height: 100vh;
+    // height: 60px;
+    display: grid;
+    place-content: center;
+    text-align: center;
+    color: #fffdfd;
+    background: linear-gradient(90deg, color(pink), color(blue));
+    animation-name: intro;
+    animation-duration: 2.5s;
+    animation-iteration-count: 1;
+    animation-timing-function: $speed;
+    animation-fill-mode: forwards;
+    animation-direction: normal;
+
+    h1 {
+        font-weight: bold;
+    }
+    span {
+        color: #ffffff;
+    }
+    @keyframes intro {
+        0% {
+            height: 100vh;
+            opacity: 0;
+        }
+        25% {
+            height: 100vh;
+            opacity: .5;
+        }
+        55% {
+            height: 100vh;
+            opacity: 1;
+        }
+        60% {
+            height: 100vh;
+            opacity: 1;
+        }
+        100% {
+            height: 60px;
+        }        
+    }
+}
+
+#container {
+    width: 100vw - .5;
+    height: calc(100vh - 62px);
+    max-width: 400px;
+    position: relative;
+    margin: 0 auto;
+    transform: translateX(200%);
+    display: grid;
+    place-items: center;
+    animation-name: con-intro;
+    animation-duration: 2s;
+    animation-delay: 2s;
+    animation-iteration-count: 1;
+    animation-timing-function: $speed;
+    animation-fill-mode: forwards;
+    animation-direction: normal;
+    @include desktop() {
+        width: 500px;
+    }
+    @keyframes con-intro {
+        0% {
+            transform: translateX(200%);
+        }
+        100% {
+            transform: translateX(0%);
+        }
+    }
+    #alert {
+        width: auto;
+        height: auto;
+        background-color:#cc4141;
+        background-color:#60cc60;
+        color: white;
+        align-self: flex-start;
+        margin-top: calc(100vh - 96vh);
+        z-index: 1;
+        font-size: 18px;
+        padding: 15px 25px;
+        border-radius: 15px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all .7s cubic-bezier(0.55, -0.55, 0.265, 1.55);
+
+        span {
+            display: inline-block;
+            @include btns(0px 0px 0px 20px, auto, auto, 20px,color(purple),white,7px,none, 8px 15px,10%,url('../img/sign-in.png'));
+            @include btnsBg(0px)
+        }
+    }
+    .alert-hidden {
+        transform: translateY(-220%);
+    }
+    .component, #alert {
+        position: absolute;
+    }
+}
+
+#sign-in {
+    height: 95%;
+    width: 90%;
+    display: grid;
+    place-content: center;
+    background: url('../img/sign-in.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 10px;
+    transition: transform .8s $speed;
+    transform: translateX(-120%);
+    // display: none;
+
+    h1 {
+        text-align: center;
+        width: 100%;
+        color: darken(color(purple),30%);
+        font-weight: bold;
+        font-size: 35px;
+    }
+
+    form {
+        width: 100%;
+        display: grid;
+        align-content: center;
+        p {
+            color: darken($color: white, $amount: 0%);
+            background-color: color(red);
+            padding: 3px 5px;
+            padding: 0px;
+            border-radius: 5px;
+            font-size: 18px;
+            text-align: right;
+        }
+    }
+    
+    input {
+        padding-left: 41px;
+        font-weight: 400;
+        width: max($numbers: 300px);
+        height: 45px;
+        margin: 10px 0px 3px;
+    }
+
+    #sn-name { 
+        @extend input;
+        @include inputbg(url('../img/person-circle-outline.svg'), 25px, 8px 10px, 0px 0px 0px 38px, color(gray));
+    }
+
+    #sn-email { 
+        @extend input;
+        @include inputbg(url('../img/mail.svg'), 22px, 10px 9px, 0px 0px 0px 38px, color(gray));
+    }
+
+    #sn-pass { 
+        @extend input;
+        @include inputbg(url('../img/key.svg'), 22px, 10px 9px, 0px 0px 0px 38px, color(gray));
+    }
+
+    #sn-conpass { 
+        @extend input;
+        @include inputbg(url('../img/key.svg'), 22px, 10px 9px, 0px 0px 0px 38px, color(gray));
+    }
+
+    .bottom {
+        width: 100%;
+        button {
+            @include btns( 10px 0px 0px 0px, 80px, 40px, 20px,color(purple),white,7px,none,0px,15%,url('../img/arrow-back-outline.svg'));
+            @include btnsBg(0px);
+            display: inline;
+            cursor: pointer;
+            float: right;
+        }
+    }
+}
+
+#log-in {
+    height: 95%;
+    width: 90%;
+    display: grid;
+    place-content: center;
+    background: url('../img/sign-in.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 10px;
+    transition: transform .8s $speed;
+    // transform: translateX(-120%);
+    // display: none;
+    h1 {
+        text-align: center;
+        width: 100%;
+        color: darken(color(purple),30%);
+        font-weight: bold;
+        font-size: 35px;
+    }form {
+        width: 100%;
+        display: grid;
+        align-content: center;
+        p {
+            color: darken($color: white, $amount: 0%);
+            background-color: color(red);
+            padding: 3px 5px;
+            padding: 0px;
+            border-radius: 5px;
+            font-size: 15px;
+            text-align: right;
+        }
+    }
+    input {
+        padding-left: 41px;
+        font-weight: 400;
+        width: max($numbers: 300px);
+        height: 45px;
+        font-family: $font;
+        margin: 10px 0px 3px;
+    }
+    #log-name { 
+        @extend input;
+        @include inputbg(url('../img/person-circle-outline.svg'), 25px, 8px 10px, 0px 0px 0px 38px, color(gray));
+    }
+
+    #log-pass { 
+        @extend input;
+        @include inputbg(url('../img/key.svg'), 23px, 8px 10px, 0px 0px 0px 38px, color(gray));
+    }
+
+    .bottom {
+        width: 100%;
+        height: 50px;
+        padding-top: 5px;
+
+        button {
+            @include btns( 0px 0px 0px 5px, 80px, 40px, 20px,color(purple),white,7px,none,0px,15%,url('../img/arrow-back-outline.svg'));
+            @include btnsBg(0px);
+            display: inline;
+            cursor: pointer;
+            float: right;
+        }
+
+        p {
+            display: inline;
+            padding-top: 20px;
+            color: color(red);
+            cursor: pointer;
+            text-decoration: underline;
+            cursor: not-allowed;
+            &:hover {
+                text-decoration: none;
+            }
+        }
+    }
+}
+
+#list {
+    width: 100%;
+    height: 100%;
+    align-self: flex-start;
+    display: flex;
+    flex-flow: nowrap column;
+    transition: transform .8s $speed;
+    transform: translateX(120%);
+    // display: none;
+
+    input {
+        font-family: $font;
+        width: 98%;
+        height: 40px;
+        margin: 15px 0px;
+        align-self: center;
+        padding-left: 38px;
+        background-image: url('../img/search.svg');
+        background-size: 20px;
+        background-position: 8px 9px;
+        background-repeat: no-repeat;
+    }
+
+    .banner {
+        width: 95%;
+        align-self: center;
+        margin: 5px 0px 5px;
+        padding: 25px 15px 5px 20px ;
+        text-align: left;
+        border-left: 5px solid darken(color(purple),15%);
+        h1 {
+            margin: 0px 0px 5px;
+            font-size: calc(100vh - 96vh);
+        }
+        p {
+            margin: 0px 5px 3px;
+            font-size: calc(100vh - 97.5vh);
+            color: darken(color(purple),15%);
+            font-weight: bold;
+        }
+    }
+
+    .empty {
+        width: 100%;
+        display: grid;
+        place-content: center;
+        text-align: center;
+        color: darken($color: #dcdcdc, $amount: 30%);
+        font-weight: bold;
+        height: calc(100% - 200px);
+        font-size: 45px;
+        padding: 5px 10px 15px;
+        display: none;
+        h2 {
+            color: #dcdcdc;
+        }
+    }
+
+    .list-ui {
+        width: 100%;
+        height: calc(100% - 200px);
+        padding: 5px 10px 15px;
+        overflow: auto;
+        // display: none;
+        .card {
+            width: 100%;
+            max-height: 135px;
+            border-radius: 5px;
+            padding: 25px 13px 15px 15px;
+            margin: 25px auto 0px auto;
+            position: relative;
+            cursor: default;
+            box-shadow: 0px 0px 10px 2px color(light-gray);
+            transition: all .3s cubic-bezier(0.77, 0, 0.175, 1);
+
+            &:hover {
+                box-shadow: 0px 0px 15px 5px color(light-gray);
+                transform: translateY(-3px);
+                .delete,.time,.edith {
+                    visibility: visible;
+                }
+            }
+
+            .title {
+                color: darken(color(purple),15%);
+                font-weight: bold;
+                font-size: 22px;
+                text-transform: capitalize;
+                margin-bottom: 6px;
+            }
+
+            .body {
+                max-width: 100%;
+            }
+            .edith {
+                @include btns(0px, 20px, 25px, 0px, color(light-red), white, 8px, none, 6px 15px,10%,url('../img/pencil.svg'));
+                @include btnsBg(8px);
+                background-size: 18px;
+                position: absolute;
+                right: 15px;
+                top: 37px;
+                transition: 0s;
+                display: none;
+                cursor: not-allowed;
+                visibility: hidden;
+            }
+
+            .delete {
+                position: absolute;
+                right: 15px;
+                top: 10px;
+                color: color(red);
+                padding: 3px 5px;
+                font-size: 14px;
+                border-radius: 5px;
+                cursor: pointer;
+                user-select: none;
+                transition: background .8s $speed;
+                visibility: hidden;
+                &:hover {
+                    background-color: darken(color(light-red), 3%);
+                }
+            }
+            
+            .time {
+                position: absolute;
+                right: 15px;
+                bottom: 0px;
+                font-weight: 600;
+                // z-index: 1;
+                padding: 0px 2px 3px;
+                background-color: #fffffff3;
+                color: color(purple);
+                visibility: hidden;
+            }
+
+            @media (max-width: 770px) {
+                .delete,.time,.edith {
+                    visibility: visible
+                }                
+            }            
+        }
+    }
+
+    #add {
+        @include btns(2px auto 0px auto, 70%, 50px, 20px, color(purple), darken(white,5%), 10px, none, 0px,15%,url('../img/add-circle-outline.svg'));
+        // align-self: flex-end;
+        @include btnsBg(100px);
+        background-position: 20% center;
+        justify-self: center;
+
+        &:hover {
+            box-shadow: 0px 0px 15px 5px rgba(145, 145, 145, 0.493);
+            transform: translateY(-2px);
+        }
+    }
+
+    #to-top, #log-out {
+        position: absolute;
+        bottom: 0px;
+        right: 5px;
+        background-size: 25px;
+        background-repeat: no-repeat;
+        background-position: center;
+
+        &:hover {
+            box-shadow: 0px 0px 15px 5px rgba(145, 145, 145, 0.493);
+            transform: translateY(-2px);
+        }
+    }
+    
+    #to-top {
+        @include btns(2px 0px 0px, 12%, 40px, 20px, color(purple), darken(white,6.5%), 15px, none, 0px,15%,url('../img/chevron-up.svg'));
+        @include btnsBg(110px);
+        background-position: center -20px;
+        font-size: 15px;
+        font-weight: bold;
+        // font-family: $font;
+    }
+    
+    #log-out {
+        @include btns(2px 0px 0px, 11.5%, 40px, 20px, color(purple), darken(white,5%), 15px, none, 0px,15%,url('../img/log-out.svg'));
+        @include btnsBg(25px);
+        left: 5px;
+    }
+
+}
+
+#new {
+    display: grid;
+    place-content: center;
+    height: 90%;
+    width: 90%;
+    transform: translateX(120%);
+    // display: none;
+    transition: transform .6s $speed;
+
+    label {
+        display: block;
+        font-family: $font;
+        margin: 0px 0px 0px 10px;
+        font-size: 20px;
+        padding-left: 5px; 
+    }
+
+    input#new-title {
+        font-family: $font;
+        padding-left: 15px;
+        width: 300px;
+        height: 45px;
+        margin: 10px 0px 15px;
+    }
+
+    textarea#new-body {
+        font-family: $font;
+        padding-left: 15px;
+        padding-top: 10px;
+        padding-right: 20px;
+        width: 300px;
+        margin: 10px 0px 5px;
+        overflow: auto;
+    }
+
+    .bottom {
+        width: 100%;
+        height: auto;
+        button#cancel {
+            @include btns(0px, 120px, 40px, 20px, color(light-red), color(red), 8px, none, 3px 5px,15%,url('../img/arrow-back-outline.svg'));
+            @include btnsBg(0px);
+        }
+        button#create {
+            @include btns(0px, 80px, 40px, 20px, color(purple), white, 8px, none, 0px,15%,url('../img/arrow-back-outline.svg'));
+            @include btnsBg(0px);
+            float: right;
+        }
+        button#edith {
+            @include btns(0px, 80px, 40px, 20px, color(purple), white, 8px, none, 0px,15%,url('../img/arrow-back-outline.svg'));
+            @include btnsBg(0px);
+            display: none;
+            float: right;
+        }
+    }
+}
+
+#detail {
+    width: 90%;
+    max-height: 98%;
+    display: grid;
+    place-items: center;
+    padding: 10px 20px;
+    box-shadow: 0px 0px 10px 5px color(light-gray);
+    border-radius: 15px;
+    transition: all .7s $speed;
+    overflow: auto;
+    transform: translateX(120%);
+    // display: none; 
+    
+    &:hover {
+        box-shadow: 0px 10px 28px 9px color(light-gray);
+        background-color: lighten($color: #60cc60, $amount: 20%);
+    }
+    
+    #detail-title {
+        width: 100%;
+        margin: 0px 0px 8px;
+        font-size: calc(100vh - 96vh);
+        font-weight: bolder;
+        text-transform: capitalize;
+        color: darken($color: color(purple), $amount: 25%) ;
+    }
+
+    #detail-time {
+        width: 100%;
+        text-align: right;
+        color: color(purple);
+        margin: 5px 0px 20px;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    #detail-body {
+        max-height: calc(100vh - 45vh);
+        max-width: 100%;
+        font-family: $font;
+        font-size: 20px;
+        margin: 5px 0px 0px;
+        padding: 10px;
+        overflow: auto;
+    }
+
+    @media (max-width: 770px) {
+        #detail-body {
+            max-height: calc(100vh - 55vh);
+        }                
+    }
+
+    .bottom { 
+        width: 100%;
+        margin: 10px 0px 5px;
+        button {
+            width: 20px;
+            height: 20px;
+            background-repeat: no-repeat;
+            background-position: center;
+            cursor: not-allowed;
+        }
+
+        #return {
+            @include btns(0px, 80px, 40px, 20px, color(purple), darken(white,0%), 8px, none, 5px 10px,15%,url('../img/arrow-back-outline.svg'));
+            // @include btnsBg(0px);
+            float: left;
+            background-size: 75px;
+            background-position: 28px -23px;
+            text-align: center;
+            color: white;
+            padding-top: 15px;
+            font-weight: bold;
+        }
+
+        #delete {
+            @include btns(0px 0px 0px 10px, 50px, 40px, 20px, color(light-red), color(red), 8px, none, 3px 5px,10%,url('../img/trash-outline.svg'));
+            @include btnsBg(20px);
+            float: right;
+            background-size: 23px;
+        }
+
+        #edith{
+            @include btns(0px, 50px, 40px, 20px, color(light-red), white, 8px, none, 6px 15px,10%,url('../img/pencil.svg'));
+            @include btnsBg(20px);
+            float: right;
+            background-size: 23px;
+        }
+    }
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    border-radius: 5px;
+    background-color: transparent;
+    transition: all .8s cubic-bezier(0.39, 0.575, 0.565, 1);
+}
+::-webkit-scrollbar-track:hover {
+    background-color: color(light-gray);
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: color(purple);
+    opacity: .5;
+}
